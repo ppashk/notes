@@ -12,14 +12,8 @@ import static com.notes.utils.ExceptionUtil.getErrorMessageFromClientException;
 @ControllerAdvice
 class ClientExceptionHandler {
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public void handle(HttpServletResponse response, IllegalArgumentException e) throws IOException {
-        response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-    }
-
     @ExceptionHandler(RestClientResponseException.class)
     public void handleClientRequests(HttpServletResponse response, RestClientResponseException e) throws IOException {
-        String message = getErrorMessageFromClientException(e);
-        response.sendError(e.getRawStatusCode(),message );
+        response.sendError(e.getRawStatusCode(), getErrorMessageFromClientException(e));
     }
 }

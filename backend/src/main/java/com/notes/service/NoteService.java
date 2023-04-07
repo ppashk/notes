@@ -40,6 +40,7 @@ public class NoteService {
         return toNoteResponse(notePage);
     }
 
+    @Transactional
     public NoteDto createNote(NoteForm form) {
         Note note = Note.builder()
                 .id(sequenceGeneratorService.generateSequence(NOTE_SEQUENCE))

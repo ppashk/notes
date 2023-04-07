@@ -6,7 +6,7 @@ import com.notes.model.User;
 import lombok.experimental.UtilityClass;
 import org.springframework.data.domain.Page;
 
-import static com.notes.utils.JavaUtils.getOrDefault;
+import static com.notes.utils.JavaUtils.getOrNull;
 import static java.util.stream.Collectors.toList;
 
 @UtilityClass
@@ -60,7 +60,7 @@ public class ModelMapper {
         return NoteDto.builder()
                 .id(entity.getId().toString())
                 .content(entity.getContent())
-                .user(toUserShort(getOrDefault(entity.getUser(), new User())))
+                .user(getOrNull(entity.getUser(), ModelMapper::toUserShort))
                 .likes(entity.getLikes())
                 .build();
     }

@@ -1,5 +1,6 @@
 .idea
 backend/.gradle
 backend/build
+backend/out
 data
 gen
