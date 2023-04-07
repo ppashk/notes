@@ -24,6 +24,7 @@ import static com.notes.utils.JavaUtils.emptyIfNull;
 import static com.notes.utils.JavaUtils.parseStringSafe;
 import static com.notes.utils.SpringUtils.checkArgumentCustom;
 import static java.lang.Long.parseLong;
+import static java.time.Instant.now;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
@@ -45,6 +46,7 @@ public class NoteService {
         Note note = Note.builder()
                 .id(sequenceGeneratorService.generateSequence(NOTE_SEQUENCE))
                 .content(form.getContent())
+                .createdDate(now())
                 .likes(0)
                 .build();
         try {

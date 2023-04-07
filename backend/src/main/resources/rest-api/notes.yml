@@ -371,6 +371,9 @@ definitions:
       id:
         type: string
         format: int64
+      createdTime:
+        type: string
+        format: date-time
       content:
         type: string
       likes:

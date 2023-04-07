@@ -60,6 +60,7 @@ public class ModelMapper {
         return NoteDto.builder()
                 .id(entity.getId().toString())
                 .content(entity.getContent())
+                .createdTime(entity.getCreatedDate())
                 .user(getOrNull(entity.getUser(), ModelMapper::toUserShort))
                 .likes(entity.getLikes())
                 .build();
