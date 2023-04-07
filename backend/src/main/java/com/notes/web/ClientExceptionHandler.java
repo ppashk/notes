@@ -1,11 +1,9 @@
 package com.notes.web;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.RestClientResponseException;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 import static com.notes.utils.ExceptionUtil.getErrorMessageFromClientException;
 
@@ -13,7 +11,7 @@ import static com.notes.utils.ExceptionUtil.getErrorMessageFromClientException;
 class ClientExceptionHandler {
 
     @ExceptionHandler(RestClientResponseException.class)
-    public void handleClientRequests(HttpServletResponse response, RestClientResponseException e) throws IOException {
-        response.sendError(e.getRawStatusCode(), getErrorMessageFromClientException(e));
+    public ResponseEntity<String> handleClientRequests(RestClientResponseException e) {
+        return ResponseEntity.status(e.getRawStatusCode()).body(getErrorMessageFromClientException(e));
     }
 }
