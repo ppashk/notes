@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'pmd'
+    id 'checkstyle'
+    id 'com.github.spotbugs'
+    id 'com.github.slamdev.openapi-spring-generator'
+    id 'io.spring.dependency-management'
+    id 'org.jetbrains.gradle.plugin.idea-ext'
+    id 'org.springframework.boot'
+}
+
+apply from: '../etc/java-support/gradle-configs/build.groovy'
+
+openapi {
+    useOptional false
+    server fileTree('src/main/resources/rest-api') { include('*.yml') }
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'javax.servlet:javax.servlet-api'
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'org.projectlombok:lombok'
+    implementation 'com.nimbusds:nimbus-jose-jwt'
+    implementation 'javax.xml.bind:jaxb-api:2.2.7'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.2.5-b10'
+
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-jetty'
+
+    annotationProcessor 'org.projectlombok:lombok'
+
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.apache.commons:commons-text:1.1'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.mockito:mockito-inline'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'com.h2database:h2'
+}

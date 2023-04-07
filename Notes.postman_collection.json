@@ -1,0 +1,378 @@
+{
+	"info": {
+		"_postman_id": "e7d21d77-4743-4933-b2c1-0becd084f43f",
+		"name": "Notes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25826049"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"strictSSL": false,
+				"followRedirects": false,
+				"disableUrlEncoding": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user2@mail.com\",\n    \"password\": \"user22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registration",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"strictSSL": false,
+				"followRedirects": false,
+				"disableUrlEncoding": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user2@mail.com\",\n    \"password\": \"user22\",\n    \"repeatPassword\": \"user22\",\n    \"firstName\": \"User\",\n    \"lastName\": \"USER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjJAY3J5cHRvLmNvbSIsImlhdCI6MTY3NjM4OTUxNywiZXhwIjoxNjc2NDg5NTE3fQ.ie5apM3XaGMzWIXVNwm9CvaraIMmKiHeCJrPzJsJWxPjSCie6Na7sIuMQ4UUVzP1GacKUkGCqnI6K0TKdyJUuA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user1@crypto.com\",\n    \"password\": \"user11\",\n    \"repeatPassword\": \"user11\",\n    \"firstName\": \"User\",\n    \"lastName\": \"USER\",\n    \"isAdmin\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/users/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjJAY3J5cHRvLmNvbSIsImlhdCI6MTY3NjM4NzYzMCwiZXhwIjoxNjc2NDg3NjMwfQ.7r-U8iAaMkiVps6u8WK-1NsAwPJc73Qay8k9EIMUsC6fP8Bp_5d3hMd5lxd37jtbzomXOsmJuI_T8YXwPRT_Ug",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin2@crypto.com\",\n    \"oldPassword\": \"321\",\n    \"password\": \"admin2\",\n    \"repeatPassword\": \"admin2\",\n    \"firstName\": \"admin\",\n    \"lastName\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get notes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create note",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get note by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/note/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"note",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/note/:id/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"note",
+						":id",
+						"like"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dislike note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLmNvbSIsImlhdCI6MTY4MDg4ODEwMiwiZXhwIjoxNjgwOTg4MTAyfQ.8H1j0CmbTlu_TDHPUt4tHyAQ-Naev8aHbERdcmgoM9SmB4Qh91TR8PLHBOoGLozLp-rBTg_TTgXezd1yLGT-fg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/note/:id/dislike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"note",
+						":id",
+						"dislike"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,386 @@
+---
+swagger: '2.0'
+info:
+  title: Notes
+  version: 0.0.1
+x-package-name: com.notes.api
+x-datetime-type: X
+x-api-name-prefix: Notes
+x-path-variable-name: notes.url
+basePath: /api
+paths:
+  /token:
+    post:
+      x-security-role: ROLE_ANONYMOUS
+      description: generate auth token
+      operationId: generateToken
+      produces:
+        - 'application/text'
+      consumes:
+        - 'application/json'
+      parameters:
+        - name: form
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CredentialForm'
+      responses:
+        200:
+          description: Returns auth token
+          schema:
+            type: string
+  /registration:
+    post:
+      x-security-role: ROLE_ANONYMOUS
+      operationId: registerUser
+      consumes:
+        - 'application/json'
+      parameters:
+        - name: form
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserRegistrationForm'
+      responses:
+        200:
+          description: OK
+  /users:
+    get:
+      x-security-role: ROLE_ADMIN
+      operationId: getUsers
+      produces:
+        - 'application/json'
+      parameters:
+        - name: includeInactive
+          in: query
+          required: false
+          type: boolean
+        - name: page
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: order
+          in: query
+          required: false
+          type: string
+        - name: sort
+          in: query
+          required: false
+          type: string
+        - name: filter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserResponse'
+    post:
+      x-security-role: ROLE_ADMIN
+      operationId: createUser
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: form
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserRegistrationForm'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserDto'
+  /users/{id}:
+    get:
+      x-security-role: ROLE_USER
+      operationId: getUserById
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserDto'
+    put:
+      x-security-role: ROLE_USER
+      operationId: updateUser
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: form
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserForm'
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserDto'
+  /notes:
+    get:
+      operationId: getNotes
+      produces:
+        - 'application/json'
+      parameters:
+        - name: page
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: order
+          in: query
+          required: false
+          type: string
+        - name: sort
+          in: query
+          required: false
+          type: string
+        - name: filter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/NoteResponse'
+    post:
+      operationId: createNote
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: form
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NoteForm'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/NoteDto'
+  /note/{id}:
+    get:
+      operationId: getNoteById
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/NoteDto'
+  /note/{id}/like:
+    put:
+      x-security-role: ROLE_USER
+      operationId: likeNote
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/NoteDto'
+  /note/{id}/dislike:
+    put:
+      x-security-role: ROLE_USER
+      operationId: dislikeNote
+      produces:
+        - 'application/json'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/NoteDto'
+definitions:
+  UserRole:
+    type: string
+    enum:
+      - ADMIN
+      - USER
+  UserResponse:
+    type: object
+    properties:
+      total:
+        type: integer
+        format: int64
+      message:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/UserShortDto'
+  CredentialForm:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  UserDto:
+    type: object
+    required:
+      - id
+      - email
+      - firstName
+      - lastName
+      - active
+    properties:
+      id:
+        type: string
+        format: int64
+      email:
+        type: string
+      lastName:
+        type: string
+      firstName:
+        type: string
+      active:
+        type: boolean
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+      likedNotes:
+        type: array
+        items:
+          type: string
+          format: int64
+  UserShortDto:
+    type: object
+    required:
+      - email
+      - firstName
+      - lastName
+      - active
+    properties:
+      email:
+        type: string
+      lastName:
+        type: string
+      firstName:
+        type: string
+      active:
+        type: boolean
+  UserRegistrationForm:
+    type: object
+    required:
+      - email
+      - password
+      - repeatPassword
+      - firstName
+      - lastName
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      repeatPassword:
+        type: string
+      lastName:
+        type: string
+      firstName:
+        type: string
+      isAdmin:
+        type: boolean
+  UserForm:
+    type: object
+    properties:
+      email:
+        type: string
+      oldPassword:
+        type: string
+      password:
+        type: string
+      repeatPassword:
+        type: string
+      lastName:
+        type: string
+      firstName:
+        type: string
+  NoteResponse:
+    type: object
+    properties:
+      total:
+        type: integer
+        format: int64
+      message:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/NoteDto'
+  NoteDto:
+    type: object
+    required:
+      - id
+      - content
+      - likes
+    properties:
+      id:
+        type: string
+        format: int64
+      content:
+        type: string
+      likes:
+        type: integer
+      user:
+        $ref: '#/definitions/UserShortDto'
+  NoteForm:
+    type: object
+    required:
+      - content
+    properties:
+      content:
+        type: string
